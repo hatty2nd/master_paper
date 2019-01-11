@@ -1,0 +1,194 @@
+\documentclass[12pt]{jarticle}
+\usepackage[dvipdfmx]{graphicx}
+% 表の幅指定
+\usepackage{multirow}
+
+% 文献番号や目次がハイパーリンク化
+\usepackage[dvipdfmx]{hyperref}
+
+\makeatletter
+\def\thefigure{\thesection.\arabic{figure}}
+\@addtoreset{figure}{section}
+
+\renewcommand\section{\@startsection {section}{1}%section周りのスペース
+{\z@}%
+{1.5\Cvs \@plus.5\Cdp \@minus.2\Cdp}%
+{.5\Cvs \@plus.3\Cdp}%
+{\reset@font\LARGE\bfseries}}%文字サイズフォント
+
+\renewcommand\subsection{\@startsection {subsection}{2}%subsection周りのスペース
+{\z@}%
+{1.5\Cvs \@plus.5\Cdp \@minus.2\Cdp}%
+{.5\Cvs \@plus.3\Cdp}%
+{\reset@font\Large\bfseries}}%文字サイズフォント
+
+\renewcommand\subsubsection{\@startsection {subsubsection}{3}%subsubsection周りのスペース
+{\z@}%
+{1.5\Cvs \@plus.5\Cdp \@minus.2\Cdp}%
+{.5\Cvs \@plus.3\Cdp}%
+{\reset@font\large\bfseries}}%文字サイズフォント
+\makeatother
+
+\begin{document}
+
+% 目次の表示
+\tableofcontents
+\clearpage
+
+\section{モジュール一覧}
+ここでは作成した各モジュールがシステムのどの部分に属するかを記述する.
+
+\begin{itemize}
+	\item 生活リズム推定部
+	\begin{itemize}
+		\item 活動量計測モジュール
+		\item 照度計測モジュール
+		\item 生活リズム算出モジュール
+	\end{itemize}
+
+	\item 時刻変化設定部
+	\begin{itemize}
+		\item 時刻更新モジュール
+		\item 表示デバイス通信モジュール
+		\item 時刻変化設定モジュール
+	\end{itemize}
+
+	\item 表示デバイス部
+	\begin{itemize}
+		\item 表示モジュール
+	\end{itemize}
+\end{itemize}
+
+\clearpage
+
+
+\section{モジュール詳細}
+ここでは各モジュールの処理の流れを記述する.
+
+\subsection{活動量計測モジュール}
+活動量計速モジュールでは, \mbox{Android Wear} の加速度センサを用いてユーザの手の動きを計測し, 保存する処理を行う.
+処理の流れを図\ref{fig:flow_accel}に表す.
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[height=10cm]{images/spec_internal/flow_accel.png}
+		\caption{活動量計測モジュールの流れ図}
+		\label{fig:flow_accel}
+	\end{center}
+\end{figure}
+\clearpage
+
+\subsection{照度計測モジュール}
+照度計測モジュールでは, 表示デバイスの照度センサを用いて部屋の照度を計測し, 保存する処理を行う.
+処理の流れを図\ref{fig:flow_illuminance}に表す.
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[height=10cm]{images/spec_internal/flow_illuminance.png}
+		\caption{照度計測モジュールの流れ図}
+		\label{fig:flow_illuminance}
+	\end{center}
+\end{figure}
+\clearpage
+
+\subsection{生活リズム算出モジュール}
+生活リズム算出モジュールでは, 取得した活動量と照度のデータから, ユーザの睡眠・覚醒状態を判別する処理を行うと共に, 就寝時刻・起床時刻をそれらのデータから算出し, 外部データベースに保存する処理を行う.
+処理の流れを図\ref{fig:flow_calc_rhythm}に表す.
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[height=10cm]{images/spec_internal/flow_calc_rhythm.png}
+		\caption{生活リズム算出モジュールの流れ図}
+		\label{fig:flow_calc_rhythm}
+	\end{center}
+\end{figure}
+\clearpage
+
+\subsection{時刻更新モジュール}
+時刻更新モジュールでは, 時刻変化設定から表示時刻を算出する処理を行う.
+処理の流れを図\ref{fig:flow_update_clock}に表す.
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[height=10cm]{images/spec_internal/flow_update_clock.png}
+		\caption{時刻更新モジュールの流れ図}
+		\label{fig:flow_update_clock}
+	\end{center}
+\end{figure}
+\clearpage
+
+\subsection{時刻変化設定モジュール}
+時刻変化設定モジュールでは, 時刻変化の設定を行う.
+処理の流れを図\ref{fig:flow_setting}に表す.
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[height=10cm]{images/spec_internal/flow_setting.png}
+		\caption{時刻変化設定モジュールの流れ図}
+		\label{fig:flow_setting}
+	\end{center}
+\end{figure}
+\clearpage
+
+\subsection{表示デバイス通信モジュール}
+表示デバイス通信モジュールでは, 表示デバイス-スマートフォン端末間の \mbox{Bluetooth LE} 接続の管理を行う.
+処理の流れを図\ref{fig:flow_connection_display}に表す.
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[height=10cm]{images/spec_internal/flow_connection_display.png}
+		\caption{表示デバイス通信モジュールの流れ図}
+		\label{fig:flow_connection_display}
+	\end{center}
+\end{figure}
+\clearpage
+
+\subsection{表示モジュール}
+表示モジュールでは, 管理アプリケーションから受け取った表示時刻を, 表示デバイスの画面に表示する処理を行う.
+処理の流れを図\ref{fig:flow_display}に表す.
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[height=10cm]{images/spec_internal/flow_display.png}
+		\caption{表示モジュールの流れ図}
+		\label{fig:flow_display}
+	\end{center}
+\end{figure}
+
+\clearpage
+
+\section{変化曲線と変化関数の対応}
+表\ref{table:easing_functions}に変化曲線と変化関数の対応を表す.
+
+\begin{table*}[h]
+	\centering
+ 	\begin{tabular}{|c|c|} \hline
+		変化曲線 & 変化関数 \\ \hline
+		\verb|Linear|			& $f(x) = x$ \\ \hline
+		\verb|EaseInQuad|		& $f(x) = x^2$ \\ \hline
+		\verb|EaseOutQuad|		& $f(x) = -(x(x-2))$ \\ \hline
+		\verb|EaseInOutQuad|	& $f(x) = x < 1/2 ? 1/2 x^2 : -(x(x-2)-1)$ \\ \hline
+		\verb|EaseInCubic|		& $f(x) = x^3$ \\ \hline
+		\verb|EaseOutCubic|		& $f(x) = (x-1)^3 + 1$ \\ \hline
+		\verb|EaseInOutCubic|	& $f(x) = x < 1/2 ? 1/2 x^3 : 1/2 ((x-2)^3 + 2)$ \\ \hline
+		\verb|EaseInQuart|		& $f(x) = x^4$ \\ \hline
+		\verb|EaseOutQuart|		& $f(x) = 1 - (x-1)^4$ \\ \hline
+		\verb|EaseInOutQuart|	& $f(x) = x < 1/2 ? 1/2 x^4 : -1/2 ((x-2)^4 - 2)$ \\ \hline
+		\verb|EaseInQuint|		& $f(x) = x^5$ \\ \hline
+		\verb|EaseOutQuint|		& $f(x) = (x-1)^5 + 1$ \\ \hline
+		\verb|EaseInOutQuint|	& $f(x) = x < 1/2 ? 1/2 x^5 : 1/2 ((t-2)^5 + 2)$ \\ \hline
+		\verb|EaseInSine|		& $f(x) = 1 - \cos(\pi x / 2) + 1$ \\ \hline
+		\verb|EaseOutSine|		& $f(x) = \sin(\pi x / 2)$ \\ \hline
+		\verb|EaseInOutSine|	& $f(x) = -1/2 (\cos(\pi x) - 1)$ \\ \hline
+		\verb|EaseInExpo|		& $f(x) = x == 0 ? 0 : 2^{10 (x-1)}$ \\ \hline
+		\verb|EaseOutExpo|		& $f(x) = x == 1 ? 1 : -(2^{-10 x}) +1$ \\ \hline
+		\verb|EaseInOutExpo|	& 省略 \\ \hline
+		\verb|EaseInCirc|		& $f(x) = - (\sqrt{1 - x^2} - 1)$ \\ \hline
+		\verb|EaseOutCirc|		& $f(x) = \sqrt{1 - (x-1)^2}$ \\ \hline
+		\verb|EaseInOutCirc|	& $f(x) = x < 1/2 ? -1/2 (\sqrt{1 - x^2} - 1) : 1/2 (\sqrt{1-(t-2)^2} + 1)$ \\ \hline
+	\end{tabular}
+	\caption{変化曲線-変化関数 対応表}
+	\label{table:easing_functions}
+\end{table*}
+
+\end{document}

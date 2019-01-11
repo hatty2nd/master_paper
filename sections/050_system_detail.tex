@@ -1,0 +1,48 @@
+%5 システム構成
+%\section{システム構成}
+%IllusionClockは時計の時刻を操作し, ユーザに対して時間の錯覚を誘発させることで理想の就寝時刻を提供するシステムである.
+
+%IllusionClockは, 生活リズム推定部, 時刻変化設定部, 表示デバイス部 の3つのモジュールによって構成されている. 図 \ref{system} に示す.
+%このシステムでできることのみを書く
+\section{遠隔旅行システム概要}
+
+提案手法に基づき遠くにいるユーザと遠隔旅行を行うシステムを実装した．
+実装にはゲーム開発エンジンUnityを使用し\cite{Unity},ヘッドマウントディスプレイはMicrosoft社のHololensを使用した\cite{Hololens}.
+本システムの構成を図\ref{figure:system}に示す.
+本システムはデータ取得部,風景生成部,出力部から構成されている.
+データ取得部で取得したユーザIDと遠隔地情報は風景生成部に送られ,遠隔地情報を元にサーバ上にパノラマ画像を生成する.風景生成部で生成されたパノラマ画像は風景を更新する際に,ユーザIDを元に識別されたHololensの出力部へ送られる.出力部からは風景を更新するかを決定するためにユーザの位置情報を風景生成部に送っている.
+
+\begin{figure}[ht]
+ \begin{center}
+  \includegraphics[width=16cm]{img/04_detail/system.eps}
+  \caption{本システムの構成}
+  \label{figure:system}
+ \end{center}
+\end{figure}
+
+\clearpage
+ 
+\subsection{システム利用イメージ}
+本システムを利用する際,ユーザはまずHololensを装着し,風景表示を行うアプリケーションを起動する.起動した際に表示されるHololensの端末IDを,遠隔旅行を行うコース設定用Webページで入力する.その後Webページに表示されているマップ上をクリックする事で遠隔旅行コースの出発地点,目的地点を設定する.システムは出発地点と目的地点を繋ぐコースが生成し,コース上のパノラマ画像を取得する.パノラマ画像の取得が完了したら,Hololens上で遠隔地の風景が表示され遠隔旅行をする事が可能になる.
+図\ref{figure:usecase}は遠隔地としてローマのコロッセオを設定し,遠隔旅行を体験している例である.
+
+\begin{figure}[ht]
+ \begin{center}
+  \includegraphics[width=16cm]{img/04_detail/useimage.eps}
+  \caption{システム利用イメージ}
+  \label{figure:usecase}
+ \end{center}
+\end{figure}
+
+\clearpage
+% データ取得部
+\input{sections/051_detail_dataequation.tex}
+\clearpage
+
+% 風景生成部
+\input{sections/052_detail_landscape.tex}
+%\clearpage
+\clearpage
+% 出力部
+\input{sections/053_detail_output.tex}
+%\clearpage

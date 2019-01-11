@@ -1,0 +1,110 @@
+\documentclass[12pt]{jarticle}
+\usepackage[dvipdfmx]{graphicx}
+
+% 文献番号や目次がハイパーリンク化
+\usepackage[dvipdfmx]{hyperref}
+
+% 表の幅指定
+\usepackage{multirow}
+
+% 余白の設定
+\usepackage[top=30truemm,bottom=30truemm,left=25truemm,right=25truemm]{geometry}
+
+%外字表示よう
+%\usepackage{utf}
+
+\makeatletter
+\def\thefigure{\thesection.\arabic{figure}}
+\@addtoreset{figure}{section}
+
+\renewcommand\section{\@startsection {section}{1}%section周りのスペース
+{\z@}%
+{1.5\Cvs \@plus.5\Cdp \@minus.2\Cdp}%
+{.5\Cvs \@plus.3\Cdp}%
+{\reset@font\LARGE\bfseries}}%文字サイズフォント
+
+\renewcommand\subsection{\@startsection {subsection}{2}%subsection周りのスペース
+{\z@}%
+{1.5\Cvs \@plus.5\Cdp \@minus.2\Cdp}%
+{.5\Cvs \@plus.3\Cdp}%
+{\reset@font\Large\bfseries}}%文字サイズフォント
+
+\renewcommand\subsubsection{\@startsection {subsubsection}{3}%subsubsection周りのスペース
+{\z@}%
+{1.5\Cvs \@plus.5\Cdp \@minus.2\Cdp}%
+{.5\Cvs \@plus.3\Cdp}%
+{\reset@font\large\bfseries}}%文字サイズフォント
+\makeatother
+
+
+\begin{document}
+
+% 著者,タイトル等
+\input{sections/001_writer}
+
+% 概要(アブストラクト)
+\input{sections/002_abstract}
+\clearpage
+
+\label{sec:start}
+
+% 目次
+\input{sections/003_index}
+\clearpage
+
+%1 担当
+%\input{sections/010_charge}
+%\clearpage
+
+%2 概要
+\input{sections/020_abstract}
+\clearpage
+
+%3 背景・目的
+\input{sections/030_background}
+\clearpage
+
+%4 提案手法
+\input{sections/035_proposed-method}
+\clearpage
+
+%4 関連研究
+\input{sections/040_relevant}
+\clearpage
+
+%5 事前検証
+%\input{sections/045_pre-experiment}
+%\clearpage
+
+%5 システム構成
+\input{sections/050_system_detail}
+\clearpage
+
+%6 評価・考察
+\input{sections/060_evaluate}
+\clearpage
+
+%7 成果
+\input{sections/070_outcome}
+\clearpage
+
+%8 今後の課題
+\input{sections/080_task}
+\clearpage
+
+%9 謝辞
+\input{sections/090_acknowledgement}
+\clearpage
+
+%10 開発環境
+\input{sections/100_environment}
+\clearpage
+
+%11 付録
+\input{sections/110_appendix}
+\clearpage
+
+% 参考文献
+\input{sections/900_biblio}
+
+\end{document}
